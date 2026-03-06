@@ -22,17 +22,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Debug Azure
-        run: |
-          echo "Subscription:"
-          az account show --query name
-      
-          echo "ACR list:"
-          az acr list -o table
-      
-          echo "Resource groups:"
-          az group list -o table
-
       - name: Build and push container image to registry
         run: |
           az acr build \
