@@ -27,8 +27,6 @@ public class EventHubProcessorClientConfiguration {
                     eventContext.getPartitionContext().getPartitionId(), eventContext.getEventData().getSequenceNumber(),
                     eventContext.getEventData().getBodyAsString());
 
-            LOGGER.info("Start processing...");
-
             String body = eventContext.getEventData().getBodyAsString();
             Message newMessage = new Message();
             newMessage.setId(UUID.randomUUID().toString());
