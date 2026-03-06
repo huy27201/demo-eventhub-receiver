@@ -6,6 +6,7 @@ on:
     
 jobs:
   build:
+    environment: dev
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -31,7 +32,9 @@ jobs:
 
   deploy:
     permissions:
+      id-token: write
       contents: none
+    environment: dev
     runs-on: ubuntu-latest
     needs: build
     steps:
