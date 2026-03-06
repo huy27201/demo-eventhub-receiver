@@ -24,8 +24,14 @@ jobs:
 
       - name: Debug Azure
         run: |
-          az account show
+          echo "Subscription:"
+          az account show --query name
+      
+          echo "ACR list:"
           az acr list -o table
+      
+          echo "Resource groups:"
+          az group list -o table
 
       - name: Build and push container image to registry
         run: |
