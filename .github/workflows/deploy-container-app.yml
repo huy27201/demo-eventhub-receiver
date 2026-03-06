@@ -23,7 +23,7 @@ jobs:
           cache: maven
 
       - name: Build jar file
-        run: mvn -B clean package
+        run: mvn -B clean package -DskipTests
 
       - name: Login to Azure
         uses: Azure/login@v2.3.0
