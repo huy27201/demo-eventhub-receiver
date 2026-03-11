@@ -33,7 +33,7 @@ public class EventHubProcessorClientConfiguration {
             newMessage.setMessage(body);
 
             messageRepository.save(newMessage)
-                    .doOnSuccess(saved -> eventContext.updateCheckpoint())
+                    .flatMap(saved -> eventContext.updateCheckpointAsync())
                     .subscribe();
         };
     }
