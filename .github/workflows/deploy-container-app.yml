@@ -1,9 +1,10 @@
 name: Deploy to Azure Container Apps
+
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
-    
+
 jobs:
   build:
     environment: dev
@@ -27,7 +28,7 @@ jobs:
 
       - name: Login to Azure
         uses: Azure/login@v2.3.0
-        with: 
+        with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -35,18 +36,18 @@ jobs:
       - name: Build and push container image to registry
         run: |
           az acr build \
-            --registry huygnguyencontainerregistry \
-            --image demo-eventhub-receiver:${{ github.sha }} \
-            --image demo-eventhub-receiver:latest \
+            --registry crevhreceiverdev \
+            --image evh-receiver:${{ github.sha }} \
+            --image evh-receiver:latest \
             .
 
   deploy:
-    permissions:
-      id-token: write
-      contents: none
     environment: dev
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      id-token: write
+      contents: none
     steps:
       - name: Login to Azure
         uses: Azure/login@v2
@@ -54,10 +55,10 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          
+
       - name: Deploy to Azure Container Apps
         run: |
           az containerapp update \
-            --name demo-eventhub-receiver \
-            --resource-group EHubRG \
-            --image huygnguyencontainerregistry.azurecr.io/demo-eventhub-receiver:${{ github.sha }}
+            --name ca-evh-receiver-dev \
+            --resource-group rg-evh-receiver-dev \
+            --image crevhreceiverdev.azurecr.io/evh-receiver:${{ github.sha }}
