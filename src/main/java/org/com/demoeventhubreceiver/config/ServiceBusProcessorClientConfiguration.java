@@ -53,9 +53,10 @@ public class ServiceBusProcessorClientConfiguration {
             newMessage.setMessage(body);
 
             messageRepository.save(newMessage)
+                    .timeout(Duration.ofSeconds(10))
                     .doOnError(ex -> LOGGER.error(
                             "Failed to persist message id: {}", message.getMessageId(), ex))
-                    .block(Duration.ofSeconds(10));
+                    .block();
         };
     }
 
