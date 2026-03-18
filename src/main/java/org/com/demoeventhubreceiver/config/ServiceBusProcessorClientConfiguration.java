@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Duration;
 import java.util.UUID;
 
 @Configuration(proxyBeanMethods = false)
@@ -51,7 +52,12 @@ public class ServiceBusProcessorClientConfiguration {
             newMessage.setId(UUID.randomUUID().toString());
             newMessage.setMessage(body);
 
-            messageRepository.save(newMessage).block();
+            messageRepository.save(newMessage)
+                    .timeout(Duration.ofSeconds(10))
+                    .doOnError(ex -> LOGGER.error(
+                            "Failed to persist message. Persisted id: {}, Service Bus message id: {}",
+                            newMessage.getId(), message.getMessageId(), ex))
+                    .block();
         };
     }
 
