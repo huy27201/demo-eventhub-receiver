@@ -51,10 +51,7 @@ public class ServiceBusProcessorClientConfiguration {
             newMessage.setId(UUID.randomUUID().toString());
             newMessage.setMessage(body);
 
-            messageRepository.save(newMessage).subscribe(
-                    saved -> { },
-                    ex -> LOGGER.error("Failed to persist message with id {}", newMessage.getId(), ex)
-            );
+            messageRepository.save(newMessage).block();
         };
     }
 
