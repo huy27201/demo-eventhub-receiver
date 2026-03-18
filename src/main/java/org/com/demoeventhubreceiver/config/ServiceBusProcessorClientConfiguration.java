@@ -58,8 +58,11 @@ public class ServiceBusProcessorClientConfiguration {
     @Bean
     ServiceBusErrorHandler processError() {
         return context -> {
-            System.out.printf("Error when receiving messages from namespace: '%s'. Entity: '%s'%n",
-                    context.getFullyQualifiedNamespace(), context.getEntityPath());
+            LOGGER.error(
+                    "Error when receiving messages from namespace: '{}'. Entity: '{}'",
+                    context.getFullyQualifiedNamespace(),
+                    context.getEntityPath(),
+                    context.getException());
         };
     }
 }
