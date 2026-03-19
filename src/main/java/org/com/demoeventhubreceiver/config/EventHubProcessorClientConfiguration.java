@@ -4,7 +4,6 @@ import com.azure.spring.cloud.service.eventhubs.consumer.EventHubsErrorHandler;
 import com.azure.spring.cloud.service.eventhubs.consumer.EventHubsRecordMessageListener;
 import org.com.demoeventhubreceiver.model.EventHubMessage;
 import org.com.demoeventhubreceiver.repository.EventHubMessageRepository;
-import org.com.demoeventhubreceiver.repository.ServiceBusMessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
