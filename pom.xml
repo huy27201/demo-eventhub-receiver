@@ -41,6 +41,10 @@
         </dependency>
         <dependency>
             <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-eventhubs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-data-cosmos</artifactId>
         </dependency>
 
