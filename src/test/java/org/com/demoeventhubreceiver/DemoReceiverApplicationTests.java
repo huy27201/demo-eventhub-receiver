@@ -2,6 +2,7 @@ package org.com.demoeventhubreceiver;
 
 import com.azure.messaging.eventhubs.EventProcessorClient;
 import com.azure.messaging.servicebus.ServiceBusProcessorClient;
+import org.com.demoeventhubreceiver.repository.EventHubMessageRepository;
 import org.com.demoeventhubreceiver.repository.ServiceBusMessageRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,10 @@ class DemoReceiverApplicationTests {
     private EventProcessorClient eventProcessorClient;
 
     @MockitoBean
-    ServiceBusMessageRepository messageRepository;
+    ServiceBusMessageRepository serviceBusMessageRepository;
+
+    @MockitoBean
+    EventHubMessageRepository eventHubMessageRepository;
 
     @Test
     void contextLoads() {
