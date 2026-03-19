@@ -40,7 +40,7 @@ public class EventHubProcessorClientConfiguration {
 
     @Bean
     EventHubsErrorHandler processEventHubError() {
-        return errorContext -> LOGGER.info("Error occurred in partition processor for partition {}",
+        return errorContext -> LOGGER.error("Error occurred in partition processor for partition {}",
                 errorContext.getPartitionContext().getPartitionId(),
                 errorContext.getThrowable());
     }
