@@ -4,12 +4,12 @@ import com.azure.spring.data.cosmos.core.mapping.Container;
 import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import org.springframework.data.annotation.Id;
 
-@Container(containerName = "messages")
-public class Message {
+@Container(containerName = "sb-messages", autoCreateContainer = false)
+public class ServiceBusMessage {
     @Id
     @PartitionKey
     private String id;
-    private String message;
+    private String body;
 
     public String getId() {
         return id;
@@ -19,11 +19,11 @@ public class Message {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getBody() {
+        return body;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setBody(String body) {
+        this.body = body;
     }
 }
